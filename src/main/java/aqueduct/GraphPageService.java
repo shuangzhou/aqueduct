@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.codehaus.jackson.JsonNode;
 import org.restlet.Server;
+import org.restlet.data.Form;
 import org.restlet.data.Protocol;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
@@ -35,8 +36,10 @@ public class GraphPageService extends ServerResource {
         // TODO
         // @Bind IngestParams
         try {
-            Map<String, String> parentMD = null;
-            Map<CopyRole, Path> copyPaths = null;
+            Form form = this.getRequest().getResourceRef().getQueryAsForm();
+            
+            Map<String, String> parentMD = extractParentMD(form);
+            Map<CopyRole, Path> copyPaths = extractCopyPaths(form);
 
             return graph(parentMD, copyPaths).toString();
         } catch (IOException e) {
@@ -45,6 +48,17 @@ public class GraphPageService extends ServerResource {
         }
     }
     
+    
+    private Map<CopyRole, Path> extractCopyPaths(Form form) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    private Map<String, String> extractParentMD(Form form) {
+        
+        return null;
+    }
+
     /**
      * Given metadata for the parent work, find or create the parent work item,
      * then create the page, make and attach copies to the page
